@@ -1,0 +1,23 @@
+Layout basically places some hierarchically orginized rectangles based on their attributes.
+Relevant attributes in Freeplane are
+floating (boolean)
+shiftX, shiftY, Vgap (numbers)
+and summary (boolean)
+The shifts means how a node is placed related to its "zero" position,
+the Vgap means additional vertical gap for child nodes
+There are also clouds which make nodes use more space depending on a cloud type and level
+Filtered (hidden) content means no own content is visible (its size = (0,0)) but the chidren can be.
+Children are hidden for folded nodes
+Location of node content relative to its parent node does not change if folding state is changed. 
+
+layout process:
+Precondition: every child node has been layed out 
+  its size is known
+  its content (text/objects) and its  child nodes are layed out and put to the right positoins
+Action:
+  current node is layed out	 by defining bounds of its content and putting its child nodes to the right location
+  Its size is calculated
+  
+Names:
+  Tree
+  Nodes with location, size, child nodes, own content visible or hidden  
