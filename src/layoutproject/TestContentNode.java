@@ -5,6 +5,8 @@ public class TestContentNode implements ContentNode {
 	private Size size = Size.ZERO_SIZE;
 	private Position position = Position.ZERO_POSITION;
 	
+	private boolean visible = true;
+	
 	public Position getPosition() {
 		return position;
 	}
@@ -12,7 +14,7 @@ public class TestContentNode implements ContentNode {
 	public void setPosition(Position position) {
 		this.position = position;
 	}
-	private boolean visible = true;
+	
 	public boolean isVisible() {
 		return visible;
 	}
@@ -25,6 +27,7 @@ public class TestContentNode implements ContentNode {
 		size = contentSize;
 		
 	}
+	
 	public Size getSize() {
 		return size;
 	}

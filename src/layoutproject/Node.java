@@ -1,9 +1,12 @@
 package layoutproject;
 
 public interface Node {
-	
-	Size getSize();
-	void setSize(Size size);
-	Position getPosition();
-	void setPosition(Position position);
+
+	public Size getSize();
+
+	public void setSize(Size size);
+
+	public Position getPosition();
+
+	public void setPosition(Position position);
 }

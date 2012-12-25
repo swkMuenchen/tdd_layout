@@ -7,6 +7,7 @@ import java.util.List;
 public class TestNode implements MapNode {
 
 	private static final TestContentNode ZERO_CONTENT = new TestContentNode();
+	
 	private TestContentNode content = ZERO_CONTENT;
 	private Size size = Size.ZERO_SIZE;
 	private Position position = Position.ZERO_POSITION;
@@ -21,31 +22,16 @@ public class TestNode implements MapNode {
 
 	private List<MapNode> children = new ArrayList<MapNode>();
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see layoutproject.Node#getSize()
-	 */
 	@Override
 	public Size getSize() {
 		return size;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see layoutproject.Node#setContent(layoutproject.Content)
-	 */
+	
 	@Override
 	public void setContent(ContentNode content) {
 		this.content = (TestContentNode) content;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see layoutproject.Node#setSize(layoutproject.Size)
-	 */
 	@Override
 	public void setSize(Size size) {
 		this.size = size;
@@ -56,21 +42,11 @@ public class TestNode implements MapNode {
 		children.add(child);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see layoutproject.Node#getContent()
-	 */
 	@Override
 	public ContentNode getContent() {
 		return content;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see layoutproject.Node#getChildren()
-	 */
+	
 	@Override
 	public Collection<MapNode> getChildren() {
 		return children;

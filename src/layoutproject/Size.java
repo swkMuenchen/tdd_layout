@@ -1,40 +1,33 @@
 package layoutproject;
 
-
-
 public class Size {
 
 	final private int width;
 	final private int height;
 	static final Size ZERO_SIZE = new Size(0, 0);
 
-		
 	public Size(int width, int height) {
 		super();
 		this.width = width;
 		this.height = height;
 	}
 
-
-
 	public int getWidth() {
 		return width;
 	}
 
-
-
 	public int getHeight() {
 		return height;
 	}
-
-
-
+	
+	public Size addSpaceAround(int spaceAround) {
+		return new Size(width + 2 * spaceAround, height + 2 * spaceAround);
+	}
+	
 	@Override
 	public String toString() {
 		return "Size [width=" + width + ", height=" + height + "]";
 	}
-
-
 
 	@Override
 	public int hashCode() {
@@ -44,7 +37,6 @@ public class Size {
 		result = prime * result + width;
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -60,12 +52,6 @@ public class Size {
 		if (width != other.width)
 			return false;
 		return true;
-	}
-
-
-
-	public Size addSpaceAround(int spaceAround) {
-		return new Size(width + 2 * spaceAround, height + 2 * spaceAround);
 	}
 	
 	
