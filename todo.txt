@@ -28,4 +28,8 @@ Names:
   Nodes with position, size, child nodes 
   ContentNode = LeafNode,  visible or hidden 
   MapNode = ContainerNode
-  
+
+Notes:
+	Unsure about the Node interfaces - ContentNode should probably implment MapNode? Should these just be joined.
+	Tests only consider the "right" facing nodes - How to handle this (polymorphism?)
+	Need a way to specify layouts

@@ -71,10 +71,10 @@ public class LayoutTest {
 		int contentX = content.getPosition().getX();
 		int contentWidth = content.getSize().getWidth();
 		int childX = node.getChild(0).getPosition().getX();
-		assertThat(childX - contentX - contentWidth, is (Layout.GAP));
+		assertThat(childX , is (contentX + contentWidth + Layout.GAP));
 		
-		assertThat(node.getContent().getPosition(), is (new Position(Layout.SPACE_AROUND, Layout.SPACE_AROUND)));
-		assertThat(node.getSize(), is(childSize));
+		/* assertThat(node.getContent().getPosition(), is (new Position(Layout.SPACE_AROUND, Layout.SPACE_AROUND)));
+		assertThat(node.getSize(), is(childSize)); */
 	}
 //	
 //	@Test
