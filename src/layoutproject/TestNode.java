@@ -35,7 +35,6 @@ public class TestNode implements MapNode {
 	@Override
 	public void setSize(Size size) {
 		this.size = size;
-
 	}
 
 	public void addChild(TestNode child) {
@@ -54,7 +53,6 @@ public class TestNode implements MapNode {
 
 	public void setContentVisible(boolean visible) {
 		content.setVisible(visible);
-
 	}
 
 	public MapNode getChild(int index) {

@@ -19,7 +19,6 @@ public class Layout {
 	}
 	
 	private void setAbsolutePositionsOfChildNodes() {
-		
 	}
 
 	private void setContentPosition() {
