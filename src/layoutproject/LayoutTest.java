@@ -34,9 +34,10 @@ public class LayoutTest {
 	
 	@Test
 	public void oneChildAndNoVisibleContentHasChildSize() {
-		TestNode child = new TestNode();
 		Size childSize = new Size(1,1);
-		//Add space around instead of calling layout
+		
+		//Add size around instead of calling layout to add this.
+		TestNode child = new TestNode();
 		child.setSize(childSize.addSpaceAround(Layout.SPACE_AROUND));
 		
 		TestNode node = new TestNode();
@@ -55,8 +56,8 @@ public class LayoutTest {
 		Size childSize = new Size(1, 1);
 		Size contentSize = new Size(1, 1);
 		
+		//Add size around instead of calling layout to add this.
 		TestNode child = new TestNode();
-		//Size is set (mock)
 		child.setSize(childSize.addSpaceAround(Layout.SPACE_AROUND));
 		
 		TestContentNode content = new TestContentNode();
@@ -75,24 +76,44 @@ public class LayoutTest {
 		int childX = node.getChild(0).getPosition().getX();
 		assertThat(childX , is (contentX + contentWidth + Layout.GAP));
 		
-		//Note we need to add on 100 to contentSize
 		int scaledContentSizeX = node.getContent().getSize().getWidth() + Layout.SPACE_AROUND * 2;
 		int scaledContentSizeY = node.getContent().getSize().getHeight() + Layout.SPACE_AROUND * 2;
 		int sizeX = Layout.GAP + child.getSize().getWidth() + scaledContentSizeX;
 		int sizeY = child.getSize().getHeight() + scaledContentSizeY;
 		assertThat(node.getSize(), is (new Size (sizeX, sizeY)));
 	}
-//	
-//	@Test
-//	public void theOnlyChildBecomesLocation() {
-//		TestNode child = new TestNode();
-//		TestNode node = child;
-//		node.addChild(child);
-//		Layout layout = new Layout();
-//		layout.doLayout(node);
-//		assertThat(child.getLocation(), is(new Location(0,0)));
-//	}
-//	
-//	
+	
+	@Test
+	public void recursiveCallToLayoutWorksCorrectly() {
+		Size childContentSize = new Size(5, 5);
+		Size contentSize = new Size(1, 1);
+		
+		TestContentNode childContent = new TestContentNode();
+		childContent.setSize(childContentSize);
+		
+		TestNode child = new TestNode();
+		child.setContent(childContent);
+		
+		TestContentNode content = new TestContentNode();
+		content.setSize(contentSize);
+		
+		TestNode node = new TestNode();
+		node.addChild(child);
+		node.setContent(content);
+		node.setContentVisible(true);
+		
+		Layout childLayout = new Layout(child);
+		childLayout.doLayout();
+		
+		Layout layout = new Layout(node);
+		layout.doLayout();
+		
+		int scaledContentSizeX = node.getContent().getSize().getWidth() + Layout.SPACE_AROUND * 2;
+		int scaledContentSizeY = node.getContent().getSize().getHeight() + Layout.SPACE_AROUND * 2;
+		int sizeX = Layout.GAP + child.getSize().getWidth() + scaledContentSizeX;
+		int sizeY = child.getSize().getHeight() + scaledContentSizeY;
+		assertThat(node.getSize(), is (new Size (sizeX, sizeY)));
+	}
+
 	
 }
