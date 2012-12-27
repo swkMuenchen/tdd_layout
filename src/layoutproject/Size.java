@@ -53,6 +53,14 @@ public class Size {
 			return false;
 		return true;
 	}
+
+	public Size add(int deltaX, int deltaY) {
+		return new Size (deltaX + width, deltaY + height);
+	}
+
+	public Size add(Size size) {
+		return new Size (size.getWidth() + width, size.getHeight() + height);
+	}
 	
 	
 }

@@ -47,14 +47,19 @@ public class Layout {
 	private void calculateNodeSize() {
 		Node content = node.getContent();
 		Iterable<MapNode> children = node.getChildren();
-		Size nodeSize;
+		Size nodeSize = Size.ZERO_SIZE;
 		
-		if(children.iterator().hasNext()) {
-			nodeSize = children.iterator().next().getSize();
-		} else {
-			Size contentSize = content.getSize().addSpaceAround(SPACE_AROUND);
-			nodeSize = contentSize;
-		}
+		//Refactorings needed.
+		if (children.iterator().hasNext()) {
+			if (node.getContent().isVisible()) {
+				nodeSize = nodeSize.add(GAP, 0);
+			}
+			nodeSize = nodeSize.add(children.iterator().next().getSize());
+		} 
+			
+		Size contentSize = content.getSize().addSpaceAround(SPACE_AROUND);
+		nodeSize = nodeSize.add(contentSize);
+		
 		node.setSize(nodeSize);
 	}
 
