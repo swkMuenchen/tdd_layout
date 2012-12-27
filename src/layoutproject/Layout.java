@@ -19,6 +19,14 @@ public class Layout {
 	}
 	
 	private void setAbsolutePositionsOfChildNodes() {
+		Iterable<MapNode> children = node.getChildren();
+		int nodeContentWidth = node.getContent().getSize().getWidth();
+		int contentX = node.getContent().getPosition().getX();
+		
+		for (Node child : children) {
+			child.setPosition(new Position(contentX + nodeContentWidth + child.getPosition().getX() , 0));
+		}
+		
 	}
 
 	private void setContentPosition() {
@@ -28,6 +36,11 @@ public class Layout {
 	}
 
 	private void calculateRelativePositionsOfChildNodes() {
+		Iterable<MapNode> children = node.getChildren();
+		
+		for (Node child : children) {
+			child.setPosition(new Position(GAP + child.getPosition().getX() , 0));
+		}
 	
 	}
 
