@@ -1,0 +1,4 @@
+--Possible changes
+
+Size of a node shoould perhaps be the node "boundary" not the size - this seems more reasonable with the size around added.
+Should child layouts be assumed or forced.
