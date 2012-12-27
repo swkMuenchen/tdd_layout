@@ -57,8 +57,10 @@ public class Layout {
 			nodeSize = nodeSize.add(children.iterator().next().getSize());
 		} 
 			
-		Size contentSize = content.getSize().addSpaceAround(SPACE_AROUND);
-		nodeSize = nodeSize.add(contentSize);
+		if (node.getContent().isVisible()) {
+			Size contentSize = content.getSize().addSpaceAround(SPACE_AROUND);
+			nodeSize = nodeSize.add(contentSize);
+		}
 		
 		node.setSize(nodeSize);
 	}

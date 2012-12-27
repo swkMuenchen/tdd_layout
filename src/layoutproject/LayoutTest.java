@@ -36,12 +36,13 @@ public class LayoutTest {
 	public void oneChildAndNoVisibleContentHasChildSize() {
 		TestNode child = new TestNode();
 		Size childSize = new Size(1,1);
-		child.setSize(childSize);
+		//Add space around instead of calling layout
+		child.setSize(childSize.addSpaceAround(Layout.SPACE_AROUND));
 		
 		TestNode node = new TestNode();
 		node.addChild(child);
 		node.setContentVisible(false);
-		
+
 		Layout layout = new Layout(node);
 		layout.doLayout();
 		
@@ -51,7 +52,7 @@ public class LayoutTest {
 	
 	@Test
 	public void oneChildAndHasVisibleContentHasChildSizePlusContentAndGap() {
-		Size childSize = new Size(1,1);
+		Size childSize = new Size(1, 1);
 		Size contentSize = new Size(1, 1);
 		
 		TestNode child = new TestNode();
@@ -75,8 +76,10 @@ public class LayoutTest {
 		assertThat(childX , is (contentX + contentWidth + Layout.GAP));
 		
 		//Note we need to add on 100 to contentSize
-		int sizeX = Layout.GAP + child.getSize().getWidth() + node.getContent().getSize().getWidth() + 100;
-		int sizeY = child.getSize().getHeight() + node.getContent().getSize().getHeight() + 100;
+		int scaledContentSizeX = node.getContent().getSize().getWidth() + Layout.SPACE_AROUND * 2;
+		int scaledContentSizeY = node.getContent().getSize().getHeight() + Layout.SPACE_AROUND * 2;
+		int sizeX = Layout.GAP + child.getSize().getWidth() + scaledContentSizeX;
+		int sizeY = child.getSize().getHeight() + scaledContentSizeY;
 		assertThat(node.getSize(), is (new Size (sizeX, sizeY)));
 	}
 //	
