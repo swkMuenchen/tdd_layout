@@ -1,6 +1,6 @@
 Layout basically places some hierarchically orginized rectangles based on their attributes.
 Relevant attributes in Freeplane are
-floating (boolean)
+free positioned (boolean)
 shiftX, shiftY, Vgap (numbers)
 and summary (boolean)
 The shifts means how a node is placed related to its "zero" position,
