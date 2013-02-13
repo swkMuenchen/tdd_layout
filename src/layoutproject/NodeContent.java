@@ -1,6 +1,6 @@
 package layoutproject;
 
-public class TestContentNode implements ContentNode {
+public class NodeContent {
 
 	private Size size = Size.ZERO_SIZE;
 	private Position position = Position.ZERO_POSITION;

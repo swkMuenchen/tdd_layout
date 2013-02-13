@@ -1,12 +1,38 @@
 package layoutproject;
 
-public interface Node {
 
-	public Size getSize();
+public class Node {
 
-	public void setSize(Size size);
+	private static final NodeContent ZERO_CONTENT = new NodeContent();
+	
+	private NodeContent content = ZERO_CONTENT;
+	private Size size = Size.ZERO_SIZE;
+	private Position position = Position.ZERO_POSITION;
 
-	public Position getPosition();
+	public Position getPosition() {
+		return position;
+	}
 
-	public void setPosition(Position position);
+	public void setPosition(Position position) {
+		this.position = position;
+	}
+
+	private Children children = new Children();
+
+	public Size getSize() {
+		return size;
+	}
+	
+	
+	public void setContent(NodeContent content) {
+		this.content = (NodeContent) content;
+	}
+
+	public void setSize(Size size) {
+		this.size = size;
+	}
+
+	public void addChild(Node child) {
+		children.add(child);
+	}
 }
