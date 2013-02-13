@@ -13,6 +13,7 @@ public class Layout {
 
 	public void doLayout() {
 		node.setSize(new Size(0,0).addSpaceAround(Layout.SPACE_AROUND));
+		
 	}
 	
 }

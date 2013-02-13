@@ -35,4 +35,9 @@ public class Node {
 	public void addChild(Node child) {
 		children.add(child);
 	}
+
+	public Size getBoundingBox() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
 }

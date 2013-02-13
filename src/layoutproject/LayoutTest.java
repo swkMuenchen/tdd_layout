@@ -12,23 +12,36 @@ public class LayoutTest {
 	
 	@Test
 	public void noChildrenAndZeroSizeContentHasSizeDoubledSpaceAround() {
+		// Arrange
 		Node node = new Node();
+		NodeContent content = new NodeContent();
+		content.setSize(new Size(0, 0));
+		node.setContent(content );
 		Layout layout = new Layout(node);
+		
+		//Act
 		layout.doLayout();
-		assertThat(node.getSize(), is(new Size(0,0).addSpaceAround(Layout.SPACE_AROUND)));
+		
+		//Assert
+		assertThat(node.getBoundingBox(), is(new Size(0,0).addSpaceAround(Layout.SPACE_AROUND)));
 	}
 	
-
-	@Test
-	public void oneChildAndZeroSizeContentHasChildSize() {
-		Node node = new Node();
-		Node child = new Node();
-		child.setSize(new Size(1,1).addSpaceAround(Layout.SPACE_AROUND));
-		node.addChild(child);
-		Layout layout = new Layout(node);
-		layout.doLayout();
-		assertThat(node.getSize(), is(child.getSize()));
-		assertTrue(child.getPosition().equals(new Position(0, 0)));
-	}
+	
+//	@Test
+//	public void oneChildAndZeroSizeContent_hasChildSize() {
+//		Node parentNode = new Node();
+//		Node childNode = new Node();
+//		childNode.setSize(
+//			new Size(1,1)
+//		);
+//		
+//		parentNode.addChild(childNode);
+//		Layout layout = new Layout(parentNode);
+//		
+//		layout.doLayout();
+//		
+//		assertThat(parentNode.getSize(), is(childNode.getSize()));
+//		assertTrue(childNode.getPosition().equals(new Position(0, 0)));
+//	}
 
 }

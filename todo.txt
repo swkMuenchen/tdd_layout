@@ -9,7 +9,7 @@ There are also clouds which make nodes use more space depending on a cloud type 
 Filtered (hidden) content means no own content is visible (its size = (0,0)) but the chidren can be.
 Children are hidden for folded nodes
 Location of node content relative to its parent node does not change if folding state is changed. 
-Consider space around
+Consider space around.
 Consider zoom
 
 Single child node is shifted by 2pt from center. (Based on zoom). 
@@ -28,3 +28,5 @@ Names:
   Nodes with position, size, child nodes 
   ContentNode = LeafNode,  visible or hidden 
   MapNode = ContainerNode
+
+  
