@@ -12,8 +12,10 @@ public class Layout {
 	}
 
 	public void doLayout() {
-		node.setSize(new Size(0,0).addSpaceAround(Layout.SPACE_AROUND));
-		
+		final Size size = new Size(0, 0);
+		Position position = new Position(0, 0);
+		final Box box = new Box(size, position ).addSpaceAround(Layout.SPACE_AROUND);
+		node.setBoundingBox(box);
 	}
 	
 }
