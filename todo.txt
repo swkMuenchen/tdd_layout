@@ -15,14 +15,14 @@ Consider zoom
 Single child node is shifted by 2pt from center. (Based on zoom). 
 
 layout process:
-Precondition: every child node has been layed out 
+Precondition: every child tree has been laid out 
   its size is known
-  its content (text/objects) and its child nodes are layed out and put to the right positions
+  its node (text/objects) and its child trees are laid out and put to the right positions
 Action:
-  current node is layed out	by 
-  	defining position of its content and child nodes 
+  the tree is laid out	by 
+  	defining positions of its root node and its child trees
   	and defining its size 
-  
+
 Names:
   Tree
   Nodes with position, size, child nodes 

@@ -6,6 +6,8 @@ public class Position {
 	final private int x;
 	final private int y;
 
+	static final Position ORIGIN = new Position(0, 0);
+
 	public Position(int x, int y) {
 		super();
 		this.x = x;

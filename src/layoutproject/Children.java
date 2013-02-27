@@ -3,9 +3,9 @@ package layoutproject;
 import java.util.ArrayList;
 
 public class Children {
-	ArrayList<Node> children = new ArrayList<>();
+	ArrayList<Tree> children = new ArrayList<>();
 
-	public void add(Node child) {
+	public void add(Tree child) {
 		children.add(child);
 	}
 }
