@@ -4,10 +4,12 @@ package layoutproject;
 public class Tree {
 
 	private Children children = new Children();
+	public final static int SPACE_AROUND = 50;
+	private Node node;
 
-	private Box box;
-	
-	public void setRoot(Node content) {
+	public void setRoot(Node node) {
+		this.node = node;
+		
 	}
 
 	public void addChild(Tree child) {
@@ -15,10 +17,9 @@ public class Tree {
 	}
 
 	public Box getBoundingBox() {
-	    return box;
+		final Size size = node.getSize();
+		Position position = new Position(0, 0);
+		return new Box(size, position ).addSpaceAround(Tree.SPACE_AROUND);
     }
 
-	public void setBoundingBox(Box box) {
-		this.box = box;
-    }
 }

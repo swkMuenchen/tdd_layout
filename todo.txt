@@ -24,13 +24,6 @@ Action:
   	and defining its size 
 
 Names:
-  Tree
-  Nodes with position, size, child nodes 
-  ContentNode = LeafNode,  visible or hidden 
-  MapNode = ContainerNode
-
-Beim nächsten Mal:
- - move to test
- - size.addspacearout test
- - NodeContent > 0
- - Kinder dazu (BoundingBox einer Node ist die Vereinigungsmenge aller Boxen der Kinder)
+  
+  Trees with position, size, child trees 
+  Node = content,  visible or hidden 

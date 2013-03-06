@@ -1,7 +1,6 @@
 package layoutproject;
 
 public class Position {
-	public static final Position ZERO_POSITION = new Position(0, 0);
 	
 	final private int x;
 	final private int y;
