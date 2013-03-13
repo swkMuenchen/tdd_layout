@@ -26,7 +26,7 @@ package layoutproject;
 public class Box {
 	final private Size size;
 	final private Position position;
-	static final Box EMTPY_AT_ORIGIN = new Box(Size.EMPTY, Position.ORIGIN );
+	static final Box EMTPY_AT_ORIGIN = new Box(Size.ZERO_SIZE, Position.ORIGIN );
 
 	public Box(Size size, Position position) {
 		this.size = size;

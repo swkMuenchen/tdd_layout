@@ -4,9 +4,7 @@ public class Size {
 
 	final private int width;
 	final private int height;
-	static final Size EMPTY = new Size(0, 0);
 	static final Size ZERO_SIZE = new Size(0, 0);
-
 	public Size(int width, int height) {
 		super();
 		this.width = width;

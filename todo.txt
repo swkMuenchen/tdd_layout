@@ -27,3 +27,6 @@ Names:
   
   Trees with position, size, child trees 
   Node = content,  visible or hidden 
+
+Use "inner bounding box" for tree layout calculations,
+and add a method for calculating "outer bounding box" by adding space around  
