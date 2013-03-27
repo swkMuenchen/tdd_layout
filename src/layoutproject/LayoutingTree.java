@@ -1,7 +1,6 @@
 package layoutproject;
 
-
-public class LayoutingTree implements Tree{
+public class LayoutingTree implements Tree {
 
 	public final static int SPACE_AROUND = 50;
 	private Node node;
@@ -9,7 +8,6 @@ public class LayoutingTree implements Tree{
 
 	public void setRoot(Node node) {
 		this.node = node;
-		
 	}
 
 	public void addChild(Tree child) {
@@ -17,13 +15,22 @@ public class LayoutingTree implements Tree{
 	}
 
 	public Box getBoundingBox() {
-		if(node.isHidden())
+		if (node.isHidden())
 			return child.getBoundingBox();
-		else{
+		else {
 			final Size size = node.getSize();
 			Position position = new Position(0, 0);
-			return new Box(size, position ).addSpaceAround(LayoutingTree.SPACE_AROUND);
+			return new Box(size, position);
 		}
-    }
+	}
+
+	public Size getSize() {
+		return new Size(1, 1);
+	}
+
+	@Override
+	public Position getPosition() {
+		return null;
+	}
 
 }
