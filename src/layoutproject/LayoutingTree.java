@@ -14,18 +14,21 @@ public class LayoutingTree implements Tree {
 		this.child = child;
 	}
 
-	public Box getBoundingBox() {
-		if (node.isHidden())
-			return child.getBoundingBox();
-		else {
-			final Size size = node.getSize();
-			Position position = new Position(0, 0);
-			return new Box(size, position);
-		}
+	@Override
+	public Size getSize() {
+		return getNodeSize().extendHorizontally(
+				getChildrenSize().getWidth() + Node.XGAP);
 	}
 
-	public Size getSize() {
-		return new Size(1, 1);
+	private Size getNodeSize() {
+		return node.getSize();
+	}
+
+	private Size getChildrenSize() {
+		if (child != null)
+			return child.getSize();
+		else
+			return Size.ZERO_SIZE;
 	}
 
 	@Override

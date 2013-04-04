@@ -5,6 +5,7 @@ public class Size {
 	final private int width;
 	final private int height;
 	static final Size ZERO_SIZE = new Size(0, 0);
+
 	public Size(int width, int height) {
 		super();
 		this.width = width;
@@ -18,11 +19,11 @@ public class Size {
 	public int getHeight() {
 		return height;
 	}
-	
+
 	public Size addSpaceAround(int spaceAround) {
 		return new Size(width + 2 * spaceAround, height + 2 * spaceAround);
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Size [width=" + width + ", height=" + height + "]";
@@ -54,12 +55,15 @@ public class Size {
 	}
 
 	public Size add(int deltaX, int deltaY) {
-		return new Size (deltaX + width, deltaY + height);
+		return new Size(deltaX + width, deltaY + height);
 	}
 
 	public Size add(Size size) {
-		return new Size (size.getWidth() + width, size.getHeight() + height);
+		return new Size(size.getWidth() + width, size.getHeight() + height);
 	}
-	
-	
+
+	public Size extendHorizontally(int widthIncrement) {
+		return new Size(width + widthIncrement, height);
+	}
+
 }
