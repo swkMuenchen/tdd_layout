@@ -6,6 +6,10 @@ public class LayoutingTree implements Tree {
 	private Node node;
 	private Tree child;
 
+	public LayoutingTree() {
+		super();
+	}
+
 	public void setRoot(Node node) {
 		this.node = node;
 	}
@@ -16,8 +20,24 @@ public class LayoutingTree implements Tree {
 
 	@Override
 	public Size getSize() {
-		return getNodeSize().extendHorizontally(
-				getChildrenSize().getWidth() + Node.XGAP);
+		if (isLeaf())
+			return getNodeSize();
+		else if (node.isHidden())
+			return getChildrenSize();
+		else {
+			return getNodeSize().extendHorizontally(
+				getChildrenSize().getWidth() + Node.X_GAP).extendVertically(
+				Node.Y_SHIFT);
+		}
+	}
+
+	public void layoutChildren() {
+		if (!isLeaf() && !node.isHidden())
+			child.setPosition(new Position(1 + Node.X_GAP, -Node.Y_SHIFT));
+	}
+
+	public boolean isLeaf() {
+		return child == null;
 	}
 
 	private Size getNodeSize() {
@@ -34,6 +54,11 @@ public class LayoutingTree implements Tree {
 	@Override
 	public Position getPosition() {
 		return null;
+	}
+
+	@Override
+	public void setPosition(Position position) {
+
 	}
 
 }

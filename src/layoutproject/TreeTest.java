@@ -41,19 +41,35 @@ public class TreeTest {
 		parentTree.setRoot(Node.HIDDEN_ROOT);
 		parentTree.addChild(childTree);
 
+		parentTree.layoutChildren();
+
 		assertThat(childTree.getPosition(), is(new Position(0, 0)));
 	}
 
 	@Test
-	public void oneChildTreeWithVisibleRootNode_treeHasChildTreeSize() {
+	public void oneChildTreeWithEqualSizedRootNode_setsTreeSize() {
 		LayoutingTree parentTree = new LayoutingTree();
 		StubTree childTree = new StubTree(ONE_X_ONE);
 
 		parentTree.setRoot(new Node(ONE_X_ONE));
 		parentTree.addChild(childTree);
 
-		Size parentTreeSize = new Size(2 + Node.XGAP, 1);
+		Size parentTreeSize = new Size(2 + Node.X_GAP, 1 + Node.Y_SHIFT);
 		assertThat(parentTree.getSize(), is(parentTreeSize));
+	}
+
+	@Test
+	public void oneChildTreeWithEqualSizedRootNode_setsChildPosition() {
+		LayoutingTree parentTree = new LayoutingTree();
+		StubTree childTree = new StubTree(ONE_X_ONE);
+
+		parentTree.setRoot(new Node(ONE_X_ONE));
+		parentTree.addChild(childTree);
+
+		parentTree.layoutChildren();
+
+		assertThat(childTree.getPosition(), //
+			is(new Position(1 + Node.X_GAP, -Node.Y_SHIFT)));
 	}
 
 }

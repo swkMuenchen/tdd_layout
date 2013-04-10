@@ -1,6 +1,7 @@
 package layoutproject;
 
 public class StubTree implements Tree {
+	private Position position = new Position(0, 0);
 	private Size size;
 
 	public StubTree(Box boundingBox) {
@@ -18,7 +19,13 @@ public class StubTree implements Tree {
 
 	@Override
 	public Position getPosition() {
-		return new Position(0, 0);
+		return position;
+	}
+
+	@Override
+	public void setPosition(Position position) {
+		this.position = position;
+
 	}
 
 }

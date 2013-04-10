@@ -66,4 +66,8 @@ public class Size {
 		return new Size(width + widthIncrement, height);
 	}
 
+	public Size extendVertically(int heightIncrement) {
+		return new Size(width, height + heightIncrement);
+	}
+
 }
