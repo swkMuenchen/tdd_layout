@@ -10,7 +10,7 @@ public class LayoutingTree implements Tree {
 		super();
 	}
 
-	public void setRoot(Node node) {
+	public void setNode(Node node) {
 		this.node = node;
 	}
 
@@ -27,8 +27,8 @@ public class LayoutingTree implements Tree {
 		else {
 			Size size = getNodeSize().extendHorizontally(
 				getChildrenSize().getWidth() + Node.X_GAP);
-			size = size.extendVertically(Math.max(0, -child.getPosition()
-				.getY()));
+			size = size.extendVertically(Math.max(0, //
+				-child.getPosition().getY()));
 			return size;
 		}
 	}
