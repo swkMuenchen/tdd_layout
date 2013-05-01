@@ -20,6 +20,22 @@ public class TreeTest {
 		parentTree.addChild(childTree);
 	}
 
+    // -5                                                                        
+    // -4                 CHILD_                                                                  
+    // -3     |----GAP---|CHILD_                                                 
+    // -2                 CHILD_                                                 
+    // -1                                                                        
+    //  0NODE 1     2     3     4     5     6                                     
+    //  1                                                                        
+
+    // -5                                                                        
+    // -4     CHILD_                                                                              
+    // -3     CHILD_                                                             
+    // -2     CHILD_                                                             
+    // -1                                                                        
+    //  0 NODE                                                                     
+    //  1                                                                        
+
 	@Test
 	public void noChildrenAndNode_TreeHasNodeSize() {
 		LayoutingTree layoutingTree = new LayoutingTree();
@@ -143,24 +159,30 @@ public class TreeTest {
 	}
 
 	@Test
-	public void oneTripleSizedChildTreeWithNode_setsChildPosition() {
-		setupOneChildTreeWithNodeAndChildHeight(1, 3);
+	public void oneTripleSizedChildTreeWithNode() {
+		
+		// -4                                                 asdf
+		// -3                 child, height 3, shifted(-3)    asdf
+		// -2                                                 asdf 
+		// -1
+		//  0 node, height 1
+    
+
+		
+		int nodeHeight = 1;
+		int childHeight = 3;
+		setupOneChildTreeWithNodeAndChildHeight(nodeHeight, childHeight);
 
 		parentTree.layoutChildren();
 
+		int halfHeightDifference = (childHeight - nodeHeight) / 2;
+		int childY = -halfHeightDifference - Node.Y_SHIFT;
 		assertThat(childTree.getPosition(), //
-			is(new Position(1 + Node.X_GAP, -1 - Node.Y_SHIFT)));
+			is(new Position(1 + Node.X_GAP, childY)));
+
+		Size parentTreeSize = new Size(2 + Node.X_GAP, //
+			nodeHeight - childY);
+		assertThat(parentTree.getSize(), is(parentTreeSize));
 	}
 
-	//
-	// @Test
-	// public void oneDoubleSizedChildTreeWithNode_setsTreeSize() {
-	// setupOneChildTreeWithNodeAndChildHeight(2, 1);
-	//
-	// parentTree.layoutChildren();
-	//
-	// int childY = (2 - 1) / 2 - Node.Y_SHIFT;
-	// Size parentTreeSize = new Size(2 + Node.X_GAP, 2 - childY);
-	// assertThat(parentTree.getSize(), is(parentTreeSize));
-	// }
 }
