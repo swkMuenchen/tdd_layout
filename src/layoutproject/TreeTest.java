@@ -20,22 +20,6 @@ public class TreeTest {
 		parentTree.addChild(childTree);
 	}
 
-    // -5                                                                        
-    // -4                 CHILD_                                                                  
-    // -3     |----GAP---|CHILD_                                                 
-    // -2                 CHILD_                                                 
-    // -1                                                                        
-    //  0NODE 1     2     3     4     5     6                                     
-    //  1                                                                        
-
-    // -5                                                                        
-    // -4     CHILD_                                                                              
-    // -3     CHILD_                                                             
-    // -2     CHILD_                                                             
-    // -1                                                                        
-    //  0 NODE                                                                     
-    //  1                                                                        
-
 	@Test
 	public void noChildrenAndNode_TreeHasNodeSize() {
 		LayoutingTree layoutingTree = new LayoutingTree();
@@ -160,15 +144,22 @@ public class TreeTest {
 
 	@Test
 	public void oneTripleSizedChildTreeWithNode() {
-		
-		// -4                                                 asdf
-		// -3                 child, height 3, shifted(-3)    asdf
-		// -2                                                 asdf 
-		// -1
-		//  0 node, height 1
-    
+        // -5                                                                        
+        // -4                 CHILD_                                                                  
+        // -3     |----GAP---|CHILD_                                                 
+        // -2                 CHILD_                                                 
+        // -1                                                                        
+        //  0NODE 1     2     3     4     5     6                                     
+        //  1                                                                        
 
-		
+        // -5                                                                        
+        // -4     CHILD_                                                                              
+        // -3     CHILD_                                                             
+        // -2     CHILD_                                                             
+        // -1                                                                        
+        //  0 NODE                                                                     
+        //  1                                                                        
+
 		int nodeHeight = 1;
 		int childHeight = 3;
 		setupOneChildTreeWithNodeAndChildHeight(nodeHeight, childHeight);
