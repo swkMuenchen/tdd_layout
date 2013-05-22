@@ -4,10 +4,6 @@ public class StubTree implements Tree {
 	private Position position = new Position(0, 0);
 	private Size size;
 
-	public StubTree(Box boundingBox) {
-		super();
-	}
-
 	public StubTree(Size size) {
 		this.size = size;
 	}

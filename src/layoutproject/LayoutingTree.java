@@ -20,27 +20,56 @@ public class LayoutingTree implements Tree {
 
 	@Override
 	public Size getSize() {
-		if (isLeaf())
-			return getNodeSize();
-		else if (node.isHidden())
-			return getChildrenSize();
-		else {
-			Size size = getNodeSize().extendHorizontally(
-				getChildrenSize().getWidth() + Node.X_GAP);
-			size = size.extendVertically(Math.max(0, //
-				-child.getPosition().getY()));
-			return size;
-		}
+        return new Size(getWidth(), getHeight());
 	}
+
+    public int getHeight() {
+        if (isLeaf())
+            return getNodeHeight();
+        else if (node.isHidden())
+            return getChildrenHeight();
+        else {
+            return getNodeHeight() + Math.max(0, //
+                -child.getPosition().getY());
+        }
+    }
+
+    public int getWidth() {
+        if (isLeaf()) {
+            return getNodeWidth();
+        }
+        else if (node.isHidden())
+            return getChildrenWidth();
+        else {
+            return getNodeWidth() + getChildrenWidth()
+                + Node.X_GAP;
+        }
+    }
+
+    private int getNodeWidth() {
+        return getNodeSize().getWidth();
+    }
+
+    private int getChildrenWidth() {
+        return getChildrenSize().getWidth();
+    }
 
 	public void layoutChildren() {
 		if (!isLeaf() && !node.isHidden()) {
-			int heightDiff = getNodeSize().getHeight()
-				- getChildrenSize().getHeight();
+			int heightDiff = getNodeHeight()
+				- getChildrenHeight();
 			child.setPosition(new Position(1 + Node.X_GAP, heightDiff / 2
 				- Node.Y_SHIFT));
 		}
 	}
+
+    private int getChildrenHeight() {
+        return getChildrenSize().getHeight();
+    }
+
+    private int getNodeHeight() {
+        return getNodeSize().getHeight();
+    }
 
 	public boolean isLeaf() {
 		return child == null;

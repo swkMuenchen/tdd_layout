@@ -20,10 +20,6 @@ public class Size {
 		return height;
 	}
 
-	public Size addSpaceAround(int spaceAround) {
-		return new Size(width + 2 * spaceAround, height + 2 * spaceAround);
-	}
-
 	@Override
 	public String toString() {
 		return "Size [width=" + width + ", height=" + height + "]";
@@ -52,14 +48,6 @@ public class Size {
 		if (width != other.width)
 			return false;
 		return true;
-	}
-
-	public Size add(int deltaX, int deltaY) {
-		return new Size(deltaX + width, deltaY + height);
-	}
-
-	public Size add(Size size) {
-		return new Size(size.getWidth() + width, size.getHeight() + height);
 	}
 
 	public Size extendHorizontally(int widthIncrement) {
