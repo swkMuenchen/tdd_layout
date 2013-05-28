@@ -5,5 +5,7 @@ public interface Tree {
 
 	Position getPosition();
 
-	void setPosition(Position position);
+    void setX(int i);
+
+    void setY(int i);
 }
