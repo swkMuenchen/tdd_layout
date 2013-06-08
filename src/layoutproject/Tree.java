@@ -1,11 +1,15 @@
 package layoutproject;
 
 public interface Tree {
-	Size getSize();
-
-	Position getPosition();
+    //	Size getSize();
 
     void setX(int i);
 
     void setY(int i);
+
+    int getY();
+
+    int getHeight();
+
+    int getWidth();
 }

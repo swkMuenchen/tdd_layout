@@ -7,30 +7,30 @@ import org.junit.Test;
 
 public class TreeTest {
 
-	private static final Size ONE_X_ONE = new Size(1, 1);
+    private static final Size ONE_X_ONE = new Size(1, 1);
 	private LayoutingTree parentTree;
 	private StubTree childTree;
 
 	private void setupOneChildTreeWithNodeAndChildHeight(int nodeHeight,
 		int childHeight) {
 		parentTree = new LayoutingTree();
-		childTree = new StubTree(new Size(1, childHeight));
+        childTree = new StubTree(1, childHeight);
 
 		parentTree.setNode(new Node(new Size(1, nodeHeight)));
 		parentTree.addChild(childTree);
 	}
 
     private void treeWithHiddenNodeAndChildHeight(int childHeight) {
-        treeWithHiddenNodeAndChild(new Size(0, childHeight));
+        treeWithHiddenNodeAndChild(0, childHeight);
     }
 
     private void treeWithHiddenNodeAndChildWidth(int childWidth) {
-        treeWithHiddenNodeAndChild(new Size(childWidth, 0));
+        treeWithHiddenNodeAndChild(childWidth, 0);
     }
 
-    private void treeWithHiddenNodeAndChild(Size size) {
+    private void treeWithHiddenNodeAndChild(int width, int height) {
         parentTree = new LayoutingTree();
-        childTree = new StubTree(size);
+        childTree = new StubTree(width, height);
         childTree.setX(-1);
         childTree.setY(-1);
         
@@ -76,12 +76,12 @@ public class TreeTest {
 
 	@Test
 	public void oneChildTreeWithHiddenNode_setsChildTreePositionToItsOrigin() {
-        treeWithHiddenNodeAndChild(ONE_X_ONE);
+        treeWithHiddenNodeAndChild(1, 1);
 
-        parentTree.layoutChildrenX();
-        parentTree.layoutChildrenY();
+        parentTree.layoutChildren();
 
-		assertThat(childTree.getPosition(), is(new Position(0, 0)));
+        assertThat(childTree.getX(), is(0));
+        assertThat(childTree.getY(), is(0));
 	}
 
 
@@ -89,11 +89,11 @@ public class TreeTest {
     public void oneChildTreeWithEqualSizedNode_X() {
         setupOneChildTreeWithNodeAndChildHeight(1, 1);
 
-        parentTree.layoutChildrenX();
-        parentTree.layoutChildrenY();
+        parentTree.layoutChildren();
+
         //  NgggggC                                                                                      
         //  0123456
-        assertThat(childTree.getPosition().getX(), is(6));
+        assertThat(childTree.getX(), is(6));
         assertThat(parentTree.getWidth(), is(7));
     }
 
@@ -101,14 +101,14 @@ public class TreeTest {
     public void oneChildTreeWithEqualSizedNode_Y() {
         setupOneChildTreeWithNodeAndChildHeight(1, 1);
 
-        parentTree.layoutChildrenX();
-        parentTree.layoutChildrenY();
+        parentTree.layoutChildren();
+
         // -3     CHILD                                                             
         // -2                                                                  
         // -1                                                                        
         //  0 NODE                                                                     
         //  1                                                                        
-        assertThat(childTree.getPosition().getY(), is(-3));
+        assertThat(childTree.getY(), is(-3));
         assertThat(parentTree.getHeight(), is(4));
     }
 
@@ -116,8 +116,7 @@ public class TreeTest {
     public void oneChildTreeWithDoubleSizedNode_Y() {
 		setupOneChildTreeWithNodeAndChildHeight(2, 1);
 
-		parentTree.layoutChildrenX();
-        parentTree.layoutChildrenY();
+        parentTree.layoutChildren();
 
         // -3     CHILD                                                             
         // -2                                                                  
@@ -125,7 +124,7 @@ public class TreeTest {
         //  0 NODE                                                                     
         //  1 NODE 
 
-        assertThat(childTree.getPosition().getY(), is(-3));
+        assertThat(childTree.getY(), is(-3));
         assertThat(parentTree.getHeight(), is(5));
 	}
 
@@ -134,14 +133,14 @@ public class TreeTest {
     public void oneChildTreeWithTrippleSizedNode_Y() {
 		setupOneChildTreeWithNodeAndChildHeight(3, 1);
 
-		parentTree.layoutChildrenX();
-        parentTree.layoutChildrenY();
+        parentTree.layoutChildren();
+
         // -2     CHILD                                                              
         // -1                                                                        
         //  0 NODE                                                                     
         //  1 NODE 
         //  2 NODE
-        assertThat(childTree.getPosition().getY(), is(-2));
+        assertThat(childTree.getY(), is(-2));
         assertThat(parentTree.getHeight(), is(5));
 	}
 
@@ -149,8 +148,7 @@ public class TreeTest {
     public void oneChildTreeWith9foldSizedNode_Y() {
 		setupOneChildTreeWithNodeAndChildHeight(9, 1);
 
-		parentTree.layoutChildrenX();
-        parentTree.layoutChildrenY();
+        parentTree.layoutChildren();
 
         //  0 NODE                                                                     
         //  1 NODE   CHILD
@@ -161,7 +159,7 @@ public class TreeTest {
         //  6 NODE
         //  7 NODE
         //  8 NODE
-        assertThat(childTree.getPosition().getY(), is(1));
+        assertThat(childTree.getY(), is(1));
         assertThat(parentTree.getHeight(), is(9));
 	}
 
@@ -170,8 +168,7 @@ public class TreeTest {
     public void oneTripleSizedChildTreeWithNode_Y() {
 		setupOneChildTreeWithNodeAndChildHeight(1, 3);
 
-		parentTree.layoutChildrenX();
-        parentTree.layoutChildrenY();
+        parentTree.layoutChildren();
 
         // -4     CHILD                                                                              
         // -3     CHILD                                                             
@@ -179,7 +176,7 @@ public class TreeTest {
         // -1                                                                        
         //  0 NODE                                                                     
 
-        assertThat(childTree.getPosition().getY(), is(-4));
+        assertThat(childTree.getY(), is(-4));
         assertThat(parentTree.getHeight(), is(5));
 	}
 

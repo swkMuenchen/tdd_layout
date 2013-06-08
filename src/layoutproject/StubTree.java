@@ -5,18 +5,12 @@ public class StubTree implements Tree {
     private int x = 0;
     private int y = 0;
 
-	public StubTree(Size size) {
-		this.size = size;
-	}
+    public StubTree(int width, int height) {
+        this.size = new Size(width, height);
+    }
 
-	@Override
-	public Size getSize() {
+    private Size getSize() {
 		return size;
-	}
-
-	@Override
-	public Position getPosition() {
-		return new Position(x, y);
 	}
 
     @Override
@@ -27,6 +21,25 @@ public class StubTree implements Tree {
     @Override
     public void setY(int y) {
         this.y = y;
+    }
+
+    @Override
+    public int getY() {
+        return y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public int getHeight() {
+        return getSize().getHeight();
+    }
+
+    @Override
+    public int getWidth() {
+        return getSize().getWidth();
     }
 
 }
