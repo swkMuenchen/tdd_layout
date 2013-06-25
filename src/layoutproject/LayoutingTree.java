@@ -1,10 +1,14 @@
 package layoutproject;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class LayoutingTree implements Tree {
 
     public final static int SPACE_AROUND = 50;
     private Node node;
     private Tree child;
+    private List<Tree> children = new LinkedList<>();
 
     public LayoutingTree() {
         super();
@@ -16,6 +20,7 @@ public class LayoutingTree implements Tree {
 
     public void addChild(Tree child) {
         this.child = child;
+        children.add(child);
     }
 
     @Override
@@ -25,8 +30,8 @@ public class LayoutingTree implements Tree {
         else if (node.isHidden())
             return getChildrenHeight();
         else {
-            return getNodeHeight() + Math.max(0, //
-                -child.getY());
+            return Math.max(getNodeHeight(), child.getY() + getChildrenHeight()) //
+                + Math.max(0, -child.getY());
         }
     }
 
@@ -57,7 +62,15 @@ public class LayoutingTree implements Tree {
 
     private void layoutChildrenY() {
         if (hasChild()) {
-            child.setY(node.isHidden() ? 0 : computeY());
+            if (node.isHidden()) {
+                int y = children.size() == 2 ? -getChildrenHeight() / 2 : 0;
+                for (final Tree child : children) {
+                    child.setY(y);
+                    y += child.getHeight() + Node.V_GAP;
+                }
+            }
+            else
+                child.setY(computeY());
         }
     }
 
@@ -79,7 +92,11 @@ public class LayoutingTree implements Tree {
     }
 
     private int getChildrenHeight() {
-        return (child != null ? child.getHeight() : 0);
+        int height = (children.size() - 1) * Node.V_GAP;
+        for (final Tree child : children) {
+            height += child.getHeight();
+        }
+        return height;
     }
 
     private int getNodeHeight() {
