@@ -25,6 +25,12 @@ public class TreeTestY {
         parentTree = TestTreeBuilder.parentTree(Node.HIDDEN_ROOT, childTree);
     }
 
+    private void hiddenNodeWithTwoChildHeights(int heightChild1, int heightChild2) {
+        childTree1 = new StubTree(0, heightChild1);
+        childTree2 = new StubTree(0, heightChild2);
+        parentTree = TestTreeBuilder.parentTree(Node.HIDDEN_ROOT, childTree1, childTree2);
+    }
+
     @Test
     public void noChildrenAndNode_TreeHasNodeHeight() {
         LayoutingTree layoutingTree = new LayoutingTree();
@@ -43,12 +49,27 @@ public class TreeTestY {
     }
 
     @Test
-    public void oneChildTreeWithHiddenNode_setsChildTreeYPositionTo0() {
+    public void oneSmallChildTreeWithHiddenNode() {
+        // -1                                                                        
+        //  0 [NODE] CHILD                                                                     
+        //  1                                                                        
         treeWithHiddenNodeAndChildHeight(1);
 
         parentTree.layoutChildren();
 
         assertThat(childTree.getY(), is(0));
+    }
+
+    @Test
+    public void oneTallChildTreeWithHiddenNode() {
+        // -1        CHILD                                                                
+        //  0 [NODE] CHILD                                                                     
+        //  1        CHILD                                                                
+        treeWithHiddenNodeAndChildHeight(3);
+
+        parentTree.layoutChildren();
+
+        assertThat(childTree.getY(), is(-1));
     }
 
     @Test
@@ -167,17 +188,11 @@ public class TreeTestY {
         assertThat(parentTree.getHeight(), is(3));
     }
 
-    private void hiddenNodeWithTwoChildHeights(int heightChild1, int heightChild2) {
-        childTree1 = new StubTree(0, heightChild1);
-        childTree2 = new StubTree(0, heightChild2);
-        parentTree = TestTreeBuilder.parentTree(Node.HIDDEN_ROOT, childTree1, childTree2);
-    }
-
     @Test
     public void twoChildTreesWithDoubleHeightAndHiddenNode() {
         // -2        CHILD1                                                         
         // -1        CHILD1                                                         
-        //  0 [NODE] VGAP=1
+        //  0 [NODE] Y_GAP
         //  1        CHILD2   
         //  2        CHILD2   
         hiddenNodeWithTwoChildHeights(2, 2);
@@ -193,7 +208,7 @@ public class TreeTestY {
     public void twoChildTreesWithDifferentHeightsAndHiddenNode() {
         // -3         CHILD1                                                         
         // -2         CHILD1                                                         
-        // -1         VGAP=1
+        // -1         Y_GAP
         //  0 [NODE]  CHILD2   
         //  1         CHILD2   
         //  2         CHILD2   
@@ -206,4 +221,38 @@ public class TreeTestY {
         assertThat(parentTree.getHeight(), is(6));
     }
 
+    @Test
+    public void twoChildTreesWithSingleHeightAndVisibleNode() {
+        // -1        CHILD1                                                         
+        //  0 NODE Y_GAP
+        //  1        CHILD2   
+        childTree1 = new StubTree(0, 1);
+        childTree2 = new StubTree(0, 1);
+        parentTree = TestTreeBuilder.parentTree(new Node(ONE_X_ONE), childTree1, childTree2);
+
+        parentTree.layoutChildren();
+
+        assertThat(childTree1.getY(), is(-1));
+        assertThat(childTree2.getY(), is(1));
+        assertThat(parentTree.getHeight(), is(3));
+    }
+
+    @Test
+    public void threeChildTreesWithSingleHeightAndVisibleNode() {
+        // -3        CHILD1                                                         
+        // -2      Y_GAP
+        // -1 NODE   CHILD2                                                        
+        //  0      Y_GAP
+        //  1        CHILD3   
+        childTree1 = new StubTree(0, 1);
+        childTree2 = new StubTree(0, 1);
+        Tree childTree3 = new StubTree(0, 1);
+        parentTree = TestTreeBuilder.parentTree(new Node(ONE_X_ONE), childTree1, childTree2, childTree3);
+
+        parentTree.layoutChildren();
+
+        assertThat(childTree1.getY(), is(-3));
+        assertThat(childTree2.getY(), is());
+        assertThat(parentTree.getHeight(), is(3));
+    }
 }
