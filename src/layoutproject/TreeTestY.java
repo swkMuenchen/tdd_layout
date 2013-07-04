@@ -239,11 +239,11 @@ public class TreeTestY {
 
     @Test
     public void threeChildTreesWithSingleHeightAndVisibleNode() {
-        // -3        CHILD1                                                         
-        // -2      Y_GAP
-        // -1 NODE   CHILD2                                                        
-        //  0      Y_GAP
-        //  1        CHILD3   
+        // -2        CHILD1                                                         
+        // -1      Y_GAP
+        //  0 NODE   CHILD2                                                        
+        //  1      Y_GAP
+        //  2        CHILD3   
         childTree1 = new StubTree(0, 1);
         childTree2 = new StubTree(0, 1);
         Tree childTree3 = new StubTree(0, 1);
@@ -251,8 +251,42 @@ public class TreeTestY {
 
         parentTree.layoutChildren();
 
-        assertThat(childTree1.getY(), is(-3));
-        assertThat(childTree2.getY(), is());
+        assertThat(childTree1.getY(), is(-2));
+        assertThat(childTree2.getY(), is(0));
+        assertThat(childTree3.getY(), is(2));
+        assertThat(parentTree.getHeight(), is(5));
+    }
+
+    @Test
+    public void oneShiftedChildTreeWithEqualSizedNode_Y() {
+        // -3                                                                  
+        // -2     CHILD[shift_y+=1]                                                             
+        // -1                                                                        
+        //  0 NODE                                                                     
+        setupOneChildTreeWithNodeAndChildHeight(1, 1);
+        childTree.getNode().setYShift(1);
+
+        parentTree.layoutChildren();
+
+        assertThat(childTree.getY(), is(-2));
         assertThat(parentTree.getHeight(), is(3));
     }
+
+    @Test
+    public void twoShiftedChildTreesWithSingleHeightAndVisibleNode() {
+        // 0  NODE      CHILD1 [shiftY+=1]                                                         
+        // 1          Y_GAP
+        // 2            CHILD2   
+        childTree1 = new StubTree(0, 1);
+        childTree2 = new StubTree(0, 1);
+        parentTree = TestTreeBuilder.parentTree(new Node(ONE_X_ONE), childTree1, childTree2);
+
+        childTree1.getNode().setYShift(1);
+        parentTree.layoutChildren();
+
+        assertThat(childTree1.getY(), is(0));
+        assertThat(childTree2.getY(), is(2));
+        assertThat(parentTree.getHeight(), is(3));
+    }
+
 }

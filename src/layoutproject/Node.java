@@ -3,12 +3,10 @@ package layoutproject;
 public class Node {
 
 	public static final Node HIDDEN_ROOT = new Node(Size.ZERO_SIZE);
-	public static final int X_GAP = 5;
-	public static final int Y_SHIFT = 3;
-    public static final int Y_GAP = 1;
 	final private Size size;
+    private int yShift;
 
-	public Node(Size size) {
+    public Node(Size size) {
 		super();
 		this.size = size;
 	}
@@ -20,4 +18,12 @@ public class Node {
 	public boolean isHidden() {
 		return size.equals(Size.ZERO_SIZE);
 	}
+
+    public void setYShift(int yShift) {
+        this.yShift = yShift;
+    }
+
+    public int getYShift() {
+        return yShift;
+    }
 }

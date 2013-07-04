@@ -1,16 +1,21 @@
 package layoutproject;
 
 public class StubTree implements Tree {
-	private Size size;
     private int x = 0;
     private int y = 0;
+    private final Node node;
+
+    @Override
+    public Node getNode() {
+        return node;
+    }
 
     public StubTree(int width, int height) {
-        this.size = new Size(width, height);
+        node = new Node(new Size(width, height));
     }
 
     private Size getSize() {
-		return size;
+        return node.getSize();
 	}
 
     @Override
