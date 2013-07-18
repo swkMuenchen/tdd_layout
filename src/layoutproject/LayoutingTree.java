@@ -35,11 +35,18 @@ public class LayoutingTree implements Tree {
         if (isLeaf())
             return getNodeHeight();
         else if (node.isHidden())
-            return getChildrenHeight();
+            return getChildrenHeightWithoutShifts();
         else {
-            return Math.max(0, -getUpperChild().getY()) // 
-                + Math.max(getNodeHeight(), getUpperChild().getY() + getChildrenHeight());
+            Tree upperChild = getUpperChild();
+            Tree lowerChild = getLowerChild();
+            int lowerChildBottomCoordinate = lowerChild.getY() + lowerChild.getHeight();
+            return Math.max(0, -upperChild.getY()) // 
+                + Math.max(getNodeHeight(), lowerChildBottomCoordinate);
         }
+    }
+
+    private Tree getLowerChild() {
+        return children.get(children.size() - 1);
     }
 
     @Override
@@ -68,7 +75,7 @@ public class LayoutingTree implements Tree {
     }
 
     private void layoutChildrenY() {
-        int y = (getNodeHeight() - getChildrenHeight()) / 2;
+        int y = (getNodeHeight() - getChildrenHeightWithoutShifts()) / 2;
         if (!node.isHidden() && children.size() == 1)
             y -= LayoutingTree.ONE_CHILD_Y_SHIFT;
         int accumulatedChildShift = 0;
@@ -93,7 +100,7 @@ public class LayoutingTree implements Tree {
         return !isLeaf();
     }
 
-    private int getChildrenHeight() {
+    private int getChildrenHeightWithoutShifts() {
         int height = (children.size() - 1) * LayoutingTree.Y_GAP;
         for (final Tree child : children) {
             height += child.getHeight();

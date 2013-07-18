@@ -289,4 +289,38 @@ public class TreeTestY {
         assertThat(parentTree.getHeight(), is(3));
     }
 
+    @Test
+    public void secondChildTreeShifted() {
+        // -1         CHILD1                                                         
+        // 0  NODE    Y_GAP                                                         
+        // 1          
+        // 2          CHILD2 [shiftY+=1]  
+        childTree1 = new StubTree(0, 1);
+        childTree2 = new StubTree(0, 1);
+        parentTree = TestTreeBuilder.parentTree(new Node(ONE_X_ONE), childTree1, childTree2);
+
+        childTree2.getNode().setYShift(1);
+        parentTree.layoutChildren();
+
+        assertThat(childTree1.getY(), is(-1));
+        assertThat(childTree2.getY(), is(2));
+        assertThat(parentTree.getHeight(), is(4));
+    }
+
+    @Test
+    public void oneNegativelyShiftedChildTreeWithEqualSizedNode_Y() {
+        // -4     CHILD[shift_y-=1]                                                             
+        // -3                                                                  
+        // -2                                                                  
+        // -1                                                                        
+        //  0 NODE                                                                     
+        setupOneChildTreeWithNodeAndChildHeight(1, 1);
+        childTree.getNode().setYShift(-1);
+
+        parentTree.layoutChildren();
+
+        assertThat(childTree.getY(), is(-4));
+        assertThat(parentTree.getHeight(), is(5));
+    }
+
 }
